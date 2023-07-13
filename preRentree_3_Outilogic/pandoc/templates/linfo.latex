@@ -1,0 +1,356 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+
+\usepackage[a4paper]{geometry}
+\usepackage{enumitem}
+\setlist{partopsep=0pt,topsep=1ex}
+\usepackage{pifont,euscript} % pour les corrections
+\usepackage{rotating} % pour les corrections
+\usepackage{tabu}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{colortbl}
+\usepackage{titling}
+\usepackage{multicol}
+\usepackage{mdframed}
+
+\setlength{\droptitle}{-1.5cm}
+\pretitle{\begin{center}\LARGE\sffamily\bfseries}
+\posttitle{\par\end{center}\vskip -.5cm}
+\preauthor{}
+\postauthor{}
+\predate{}
+\postdate{}
+
+\definecolor{vert}{RGB}{78,100,26}
+\definecolor{violet}{RGB}{130,25,111}
+\definecolor{orange}{RGB}{234,91,12}
+\definecolor{rouge}{RGB}{230,56,18}
+\definecolor{beige}{RGB}{242,238,231}
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{100,100,100}
+
+$if(fontfamily)$
+\usepackage{$fontfamily$}
+$else$
+\usepackage{lmodern}
+$endif$
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+% \usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+$if(euro)$
+  \usepackage{eurosym}
+$endif$
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+  \usepackage{newunicodechar}
+  \newfontfamily{\fallbackfont}{DejaVu Sans}
+  \DeclareTextFontCommand{\textfallback}{\fallbackfont}
+  \newunicodechar{★}{\textfallback{★}}
+$if(mainfont)$
+    \setmainfont[$mainfontoptions$]{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont[$sansfontoptions$]{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[$if(monofontoptions)$$monofontoptions$$endif$]{$monofont$}
+$endif$
+$if(mathfont)$
+    \setmathfont(Digits,Latin,Greek)[$mathfontoptions$]{$mathfont$}
+$endif$
+$if(CJKmainfont)$
+    \usepackage{xeCJK}
+    \setCJKmainfont[$CJKoptions$]{$CJKmainfont$}
+$endif$
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+%            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            colorlinks=true,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+$if(lang)$
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{$mainlang$}
+  \setotherlanguages{$for(otherlang)$$otherlang$$sep$,$endfor$}
+\else
+  \usepackage[shorthands=off,$lang$]{babel}
+\fi
+$endif$
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(tikz)$
+\usepackage{tikz}
+\usetikzlibrary{quotes}
+\usetikzlibrary{arrows,positioning} 
+
+\tikzstyle{val}=[rectangle,draw]
+\tikzstyle{var}=[rectangle,rounded corners=1.5ex,draw,bleu,minimum size=3ex]
+\tikzstyle{aff}=[->,thick]
+\tikzset{
+  every node/.style={font=\footnotesize},
+  instr/.style={rectangle,draw=black!70},
+  test/.style={rectangle,rounded corners,draw=bleu!70,text=bleu},
+  every edge/.style={>=stealth,semithick,bend angle=45,draw,->},
+  every edge quotes/.style={inner sep=.5em,font=\scriptsize,color=orange},
+  vrai/.style={left,"vrai"},
+  faux/.style={right,"faux"},
+}
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes
+$endif$
+$if(tables)$
+\usepackage{longtable,booktabs}
+$endif$
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+$if(numbersections)$
+\setcounter{secnumdepth}{5}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+
+
+\usepackage{fancyhdr}
+\fancyhead[L]{\includegraphics[height=1.1cm]{UPEM-IGM-V1_300dpi.png}}
+\fancyhead[C]{%
+$if(course)${\bf $course$}\\$endif$%
+$if(curriculum)$$curriculum$\\$endif$%
+$if(date)$$date$$else$\today$endif$}
+\fancyhead[R]{\includegraphics[height=1.3cm]{logo-ligm.png}}
+\setlength{\headheight}{50pt}
+\renewcommand{\headrulewidth}{1pt}
+
+
+% cadres informatifs
+\newcommand{\but}[1]{%
+\hbox{}\noindent%
+\fcolorbox{CadetBlue}{white}{%
+  \parbox{\dimexpr\linewidth-2\fboxsep-1pt\relax}{%
+    \vskip10pt%
+    \leftskip10pt\rightskip10pt%
+    #1%
+    \vskip10pt}}}
+
+
+% Environnements d'exercices
+
+\font\manual=manfnt % font used for the METAFONT logo, etc.
+\def\barble{{\manual\char1}}
+\def\fulltriangleright{{\manual\char120}} %
+\def\fulltriangleup{{\manual\char54}} %
+\def\fulltriangledown{{\manual\char55}}
+\def\littlecube{{\manual\char28}}
+\def\prettystar{{\manual\char30}}
+\def\littlecircles{{\manual\char36}}
+\def\littlelosanges{{\manual\char37}}
+\def\littlecloud{{\manual\char38}}
+\def\ellipsoid{{\manual\char88}}
+\def\zip{{\manual\char121}} % -/\/->
+\def\dbendright{{\manual\char126}}
+\def\dbendleft{{\manual\char127}}
+\def\question{\noindent\llap{\ding{90}\ding{212}}{\kern1pc}}
+
+% exercice simple
+\newcounter{exo_count}
+\def\exoname{Exercice}
+\newenvironment{exercice}[1][]%
+{\smallbreak\refstepcounter{exo_count}%
+\vspace{0.3cm}%
+\begin{sloppypar}\noindent{\fulltriangleright\kern 2pt%
+\bf\exoname~\arabic{exo_count} : #1} %
+}%
+{\end{sloppypar}%
+}
+
+
+% Corrections
+
+\newif\ifCORRECTION
+$if(correction)$
+\CORRECTIONtrue
+$else$
+\CORRECTIONfalse
+$endif$
+
+% environnement correction
+\newbox\debutcor
+\newbox\fincor
+\def\setcorboxes#1{
+  \setbox\debutcor=\hbox to #1{%
+      \Large\ding{33}\small\leaders\hbox to .6em{\hfill\rule{2pt}{.8pt}}\hss}%
+  \setbox\fincor=\hbox{\begin{turn}{180}\copy\debutcor\end{turn}}%
+  }
+
+\def\corrname{correction}
+\def\correction{%
+  \ifCORRECTION
+  \typeout{Warning: correction ex.\arabic{exo_count} included}
+  \setcorboxes{\linewidth}
+  \noindent\ \kern-1ex\copy\debutcor\nobreak\par
+  \bgroup\normalfont\small\noindent\ignorespaces%
+  \else
+  \typeout{Correction ex.\arabic{exo_count} ignored}
+  \fi
+}
+\def\endcorrection{%
+  \ifCORRECTION
+  \egroup\nobreak\noindent\copy\fincor%\bigbreak
+  \fi
+}
+
+$if(title)$
+\title{\color{BrickRed}$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+%\date{$date$}
+\date{}
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$if(abstract)$
+\but{$abstract$}
+$endif$
+
+\thispagestyle{fancy}
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+{
+\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
