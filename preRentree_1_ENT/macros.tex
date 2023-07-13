@@ -1,0 +1,210 @@
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=40mm]{geometry}
+\usepackage{enumitem}
+\setlist{partopsep=0pt,topsep=1ex}
+\usepackage{pifont,euscript}
+\usepackage{rotating}
+\usepackage{tabu}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{comment}
+\usepackage{colortbl}
+\usepackage{titling}
+\usepackage{multicol}
+\usepackage[french]{babel}
+\usepackage{mdframed}
+\usepackage{textcomp}
+\usepackage{listings}
+\lstloadlanguages{Python}
+
+\setlength{\droptitle}{-1.5cm}
+\pretitle{\begin{center}\LARGE\sffamily\bfseries}
+\posttitle{\par\end{center}\vskip -.5cm}
+\preauthor{}
+\postauthor{}
+\predate{}
+\postdate{}
+
+\definecolor{UGEBlue}{RGB}{47,42,133}
+\definecolor{vert}{RGB}{78,100,26}
+\definecolor{violet}{RGB}{130,25,111}
+\definecolor{orange}{RGB}{234,91,12}
+\definecolor{rouge}{RGB}{230,56,18}
+\definecolor{beige}{RGB}{242,238,231}
+\definecolor{bleu}{RGB}{0,74,155}
+\definecolor{gris}{RGB}{100,100,100}
+\definecolor{commentColor}{rgb}{0.38,0.63,0.69}
+\definecolor{stringColor}{rgb}{0.25,0.44,0.63}
+\definecolor{typeColor}{rgb}{0.56,0.13,0.00}
+\definecolor{keywordColor}{rgb}{0.00,0.44,0.13}
+\definecolor{digitColor}{rgb}{0.25,0.63,0.44}
+
+\lstset{ %
+  backgroundcolor=\color{white},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  captionpos=b,
+  commentstyle={\bfseries\itshape\color{commentColor}},
+  escapeinside={\%*}{*)},
+  keywordstyle=\color{keywordColor},
+  stringstyle=\color{stringColor},
+  numbers=left,
+  stepnumber=1,
+  numberstyle=\scriptsize,
+  numbersep=10pt,
+  language=Python,
+  upquote=true
+}
+\lstset{%
+  literate=%
+    {é}{{\'e}}1
+    {è}{{\`e}}1
+    {ê}{{\^e}}1
+    {ë}{{\"e}}1
+    {à}{{\`a}}1
+    {â}{{\^a}}1
+    {ä}{{\"a}}1
+    {î}{{\^i}}1
+    {ï}{{\"i}}1
+    {ù}{{\`u}}1
+    {û}{{\^u}}1
+    {ü}{{\"u}}1
+    {ô}{{\^o}}1
+    {ö}{{\"o}}1
+    {ç}{{\c c}}1
+    {œ}{{\oe{}}}1
+    {0}{{{{\color{digitColor}0}}}}1
+    {1}{{{{\color{digitColor}1}}}}1
+    {2}{{{{\color{digitColor}2}}}}1
+    {3}{{{{\color{digitColor}3}}}}1
+    {4}{{{{\color{digitColor}4}}}}1
+    {5}{{{{\color{digitColor}5}}}}1
+    {6}{{{{\color{digitColor}6}}}}1
+    {7}{{{{\color{digitColor}7}}}}1
+    {8}{{{{\color{digitColor}8}}}}1
+    {9}{{{{\color{digitColor}9}}}}1
+    {.0}{{{{\color{digitColor}.0}}}}2
+    {.1}{{{{\color{digitColor}.1}}}}2
+    {.2}{{{{\color{digitColor}.2}}}}2
+    {.3}{{{{\color{digitColor}.3}}}}2
+    {.4}{{{{\color{digitColor}.4}}}}2
+    {.5}{{{{\color{digitColor}.5}}}}2
+    {.6}{{{{\color{digitColor}.6}}}}2
+    {.7}{{{{\color{digitColor}.7}}}}2
+    {.8}{{{{\color{digitColor}.8}}}}2
+    {.9}{{{{\color{digitColor}.9}}}}2
+    {'h}{{{{\color{digitColor}'h}}}}2
+}
+\lstset{%
+  emph={int,char,void,float,double},
+  emphstyle=\color{typeColor}
+}
+
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{upquote}
+
+\usepackage[unicode=true]{hyperref}
+\hypersetup{breaklinks=true,
+%            bookmarks=true,
+            pdfauthor={},
+            pdftitle={\titre},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{tikz}
+\usetikzlibrary{quotes}
+\usetikzlibrary{arrows,positioning} 
+
+\tikzstyle{val}=[rectangle,draw]
+\tikzstyle{var}=[rectangle,rounded corners=1.5ex,draw,bleu,minimum size=3ex]
+\tikzstyle{aff}=[->,thick]
+\tikzset{
+  every node/.style={font=\footnotesize},
+  instr/.style={rectangle,draw=black!70},
+  test/.style={rectangle,rounded corners,draw=bleu!70,text=bleu},
+  every edge/.style={>=stealth,semithick,bend angle=45,draw,->},
+  every edge quotes/.style={inner sep=.5em,font=\scriptsize,color=orange},
+  vrai/.style={left,"vrai"},
+  faux/.style={right,"faux"},
+}
+\usepackage{color}
+\usepackage{fancyvrb}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\usepackage{fancyhdr}
+\fancyhead[L]{\includegraphics[height=1.1cm]{UPEM-IGM-V1_300dpi.png}}
+\fancyhead[C]{{
+\bf Pré-rentrée informatique\\
+Semaine d'intégration du 5 au 9 septembre 2022\\
+}
+L1 Informatique \& Mathématiques
+}
+%\fancyhead[R]{\includegraphics[height=1.3cm]{logo-ligm.png}}
+\setlength{\headheight}{50pt}
+\renewcommand{\headrulewidth}{1pt}
+
+
+% cadres informatifs
+\newcommand{\but}[1]{%
+\hbox{}\noindent%
+\fcolorbox{CadetBlue}{white}{%
+  \parbox{\dimexpr\linewidth-2\fboxsep-1pt\relax}{%
+    \vskip10pt%
+    \leftskip10pt\rightskip10pt%
+    #1%
+    \vskip10pt}}\medskip\thispagestyle{fancy}}
+
+
+% Environnements d'exercices
+
+\font\manual=manfnt % font used for the METAFONT logo, etc.
+\def\barble{{\manual\char1}}
+\def\fulltriangleright{{\manual\char120}} %
+\def\fulltriangleup{{\manual\char54}} %
+\def\fulltriangledown{{\manual\char55}}
+\def\littlecube{{\manual\char28}}
+\def\prettystar{{\manual\char30}}
+\def\littlecircles{{\manual\char36}}
+\def\littlelosanges{{\manual\char37}}
+\def\littlecloud{{\manual\char38}}
+\def\ellipsoid{{\manual\char88}}
+\def\zip{{\manual\char121}} % -/\/->
+\def\dbendright{{\manual\char126}}
+\def\dbendleft{{\manual\char127}}
+\def\question{\noindent\llap{\ding{90}\ding{212}}{\kern1pc}}
+\newcounter{exo_count}
+\def\exoname{Exercice}
+\newenvironment{exercice}[1][]%
+{\smallbreak\refstepcounter{exo_count}%
+\vspace{0.3cm}%
+\begin{sloppypar}\noindent{\fulltriangleright\kern 2pt%
+\bf\exoname~\arabic{exo_count} : #1} %
+}%
+{\end{sloppypar}%
+}
+
+
+
+\newenvironment{correction}{\subsection*{Correction}}{\medskip}
+
+\def\labelenumi{\arabic{enumi}.}
+\def\labelenumii{\alph{enumii}.}
+
+\title{\color{UGEBlue}\titre}
+%\date{Semestre 2}
+\date{}
+
+
+\newcommand{\code}[1]{\lstinline{#1}}
+\lstnewenvironment{fullcode}{\lstset{xleftmargin=1.4em}}{}
+\lstnewenvironment{nonumbercode}{\lstset{numbers=none}}{}

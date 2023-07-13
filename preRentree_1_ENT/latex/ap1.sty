@@ -1,0 +1,205 @@
+% codage de caractères et langue
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{frenchle}
+
+\RequirePackage{graphicx} % pour le logo de mlv
+\RequirePackage[usenames,dvipsnames]{xcolor}
+
+\RequirePackage{url}
+\RequirePackage{pifont,euscript} % pour les corrections
+\RequirePackage{rotating} % pour les corrections
+\RequirePackage{textcomp} % pour 'upquote'
+
+\RequirePackage{courier}
+
+% mise en page
+\RequirePackage[a4paper]{geometry}
+\RequirePackage{fancyhdr}
+
+\newcommand{\coursename}{Algorithmique et Programmation 1}
+\fancyhead[L]{\includegraphics[height=1.1cm]{../../../latex/UPEM_LOGO_PAPETERIE_300DPI.png}}
+\fancyhead[C]{{\bf \coursename}\\
+L1 Mathématiques -- L1 Informatique\\
+2016-2017}
+\fancyhead[R]{\includegraphics[height=1.3cm]{../../../latex/logo-ligm.png}}
+\setlength{\headheight}{50pt}
+\renewcommand{\headrulewidth}{1pt}
+
+\RequirePackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily,
+  language=Python,
+  morekeywords={as,assert,nonlocal,with,yield},
+  morekeywords={True,False,None},
+  columns=fullflexible,
+  mathescape,
+%  frame=leftline,
+  showstringspaces=true,
+%  linewidth=.8\textwidth,
+%  xleftmargin=2em,
+  keepspaces,
+  literate=
+  {ô}{{\^o}}1
+  {é}{{\'e}}1
+  {è}{{\`e}}1
+  {ê}{{\^e}}1
+  {à}{{\`a}}1
+  {â}{{\^a}}1
+  {>>>}{{$>\!>\!>$}}{3},
+  %upquote=true,
+}
+
+\newcommand{\mytitle}[1]{\title{\color{BrickRed}#1}}
+\author{}
+\date{}
+
+% cadres informatifs
+\newcommand{\but}[1]{%
+\hbox{}\noindent%
+\fcolorbox{CadetBlue}{white}{%
+  \parbox{\dimexpr\linewidth-2\fboxsep-1pt\relax}{%
+    \vskip10pt%
+    \leftskip10pt\rightskip10pt%
+    \textbf{Objectif :} #1%
+    \vskip10pt}}}
+\newcommand{\rappel}[1]{%
+\hbox{}\noindent%
+\fcolorbox{BrickRed}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-1pt\relax}{%
+  \vskip10pt%
+  \leftskip10pt\rightskip10pt%
+  #1%
+  \vskip10pt}}}
+\newcommand{\warning}[1]{%
+\hbox{}\noindent%
+\fcolorbox{BrickRed}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-1pt\relax}{%
+  \vskip10pt%
+  \leftskip10pt\rightskip10pt%
+  \begin{sloppypar}\noindent\hangindent 1cm\hangafter=-2\ignorespaces%
+    {\color{BrickRed} \bf \llap{\hbox to .9cm{\dbendleft\hfill\kern 2pt}}%
+      \textbf{Attention :}} #1%
+  \end{sloppypar}
+  \vskip10pt}}}
+
+% quelques symboles
+
+\font\manual=manfnt % font used for the METAFONT logo, etc.
+\def\barble{{\manual\char1}}
+\def\fulltriangleright{{\manual\char120}} %
+\def\fulltriangleup{{\manual\char54}} %
+\def\fulltriangledown{{\manual\char55}}
+\def\littlecube{{\manual\char28}}
+\def\prettystar{{\manual\char30}}
+\def\littlecircles{{\manual\char36}}
+\def\littlelosanges{{\manual\char37}}
+\def\littlecloud{{\manual\char38}}
+\def\ellipsoid{{\manual\char88}}
+\def\zip{{\manual\char121}} % -/\/->
+\def\dbendright{{\manual\char126}}
+\def\dbendleft{{\manual\char127}}
+\def\question{\noindent\llap{\ding{90}\ding{212}}{\kern1pc}}
+
+% Environnements d'exercices
+
+% exercice simple
+\newcounter{exo_count}
+\def\exoname{Exercice}
+\newenvironment{exercice}[1][]%
+{\smallbreak\refstepcounter{exo_count}%
+\vspace{0.3cm}%
+\begin{sloppypar}\noindent{\fulltriangleright\kern 2pt%
+\bf\exoname~\arabic{exo_count} : #1} %
+}%
+{\end{sloppypar}%
+}
+
+% exercice un peu plus difficile
+\newenvironment{Exercice}[1][]%
+{\bigbreak\refstepcounter{exo_count}%
+\vspace{0.3cm}%
+\begin{sloppypar}\noindent\hangindent -.9cm\ignorespaces%
+{\bf \llap{\hbox to .9cm{\dbendleft}\fulltriangleright\kern 2pt}%
+\exoname~\arabic{exo_count} : #1}%
+}%
+{\end{sloppypar}%
+}
+
+% exercice encore un peu plus difficile
+\newenvironment{EXercice}%
+{\bigbreak\refstepcounter{exo_count}%
+\vspace{0.3cm}%
+\begin{sloppypar}\noindent\hangindent 1.3cm\hangafter=-2\ignorespaces%
+{\bf \llap{\hbox to 1.3cm{\dbendleft\kern1pt\dbendleft\hfill\hfill%
+\fulltriangleright\kern 2pt}}%
+\exoname~\arabic{exo_count}.}%
+}%
+{\end{sloppypar}%
+}
+
+% Corrections
+
+\newif\ifCORRECTION
+\CORRECTIONfalse
+
+% environnement correction
+\newbox\debutcor
+\newbox\fincor
+\def\setcorboxes#1{
+  \setbox\debutcor=\hbox to #1{%
+      \Large\ding{33}\small\leaders\hbox to .6em{\hfill\rule{2pt}{.8pt}}\hss}%
+  \setbox\fincor=\hbox{\begin{turn}{180}\copy\debutcor\end{turn}}%
+  }
+
+\def\corrname{correction}
+\def\correction{%
+  \ifCORRECTION
+  \par\bigbreak
+  \typeout{Warning: correction ex.\arabic{exo_count} included}
+  \setcorboxes{\linewidth}
+  \noindent\ \kern-1ex\copy\debutcor\par\nobreak
+  \bgroup\normalfont\small\noindent\ignorespaces%
+  \else
+  \typeout{Correction ex.\arabic{exo_count} ignored}
+  \setbox0=\vbox\bgroup\small\noindent\ignorespaces%
+  \fi
+}
+\def\endcorrection{%
+  \egroup\par
+  \ifCORRECTION
+  \vspace*{-.5em}
+  \nobreak\noindent\copy\fincor%\bigbreak
+  \par\ignorespaces\noindent%
+  \fi
+}
+
+% correction a inserer au milieu du texte
+\def\corr#1{\ifCORRECTION{\color{BrickRed}{\bf Élément de correction :} #1}\fi}
+
+
+
+% Environnements d'exemples
+
+\newcounter{example_count}
+\def\examplename{Exemple}
+\newenvironment{exemple}[1][]%
+{\smallbreak\refstepcounter{example_count}%
+\vspace{0.3cm}%
+\begin{sloppypar}\noindent{\fulltriangleright\kern 2pt%
+\bf\examplename~\arabic{example_count} : #1} %
+}%
+{\end{sloppypar}%
+}
+
+% pour inserer un fichier
+% \lstinputlisting{source_filename.py}
+
+
+
+% code
+%\newcommand{\code}[1]{{\tt #1}}
+\newcommand{\code}[2][]{\lstinline[#1]|#2|}
+
+% code bold
+\newcommand{\codeb}[1]{{\tt \bfseries #1}}
